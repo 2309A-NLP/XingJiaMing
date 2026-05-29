@@ -1,0 +1,52 @@
+RAG：角色扮演系统（大模型，RAG）： character.ai
+需求分析：产出物：需求规格说明书，功能，业务（业务流程，流程图，业务规则）
+人物角色：自己定义：提示词模板，知识库（milvus）
+项目：基于RAG的角色扮演系统
+提示词模板
+角色扮演系统（大模型，RAG）：社交 NPC（Non Player Character） 医生 心理医生 律师 股票（证券投资） 金融理财师 科学家 教师 英语学习
+数据集：国家卫健委 高血压治疗指南  github haggingface modelscope 律师：法律条文 司法解释 判例（中国裁判文书网） 股票（东方财富网）
+向量化模型：BGE-m3
+重排序模型：BGE-rerank
+milvus：linux 混合检索 BM25
+多轮对话 大模型是没有记忆 Redis（短期记忆）  长期记忆（milvus）
+多用户，多角色
+知识库动态更新
+MySQL
+用户信息
+角色信息
+Redis：保存最近聊天记录：短期记忆。 O  Redis5种常用数据类型
+缓存
+大模型：本地部署（*vLLM* *SGLang* xInernce），在线API（豆包，硅基流动，Deepseek, 千问， 国外：Claude, ChatGPT, Gemini）
+需求：扮演一个特点的角色，实现一个聊天机器人,提示词模版。 朋友：人物性格（NPC Non Player Character，虚拟玩家）。
+社交领域：虚拟朋友（Character.ai）， 具体领域专家：医生，中医，心理医生，律师，金融理财师
+
+RAG评测：RAGAS
+postman：测试
+压力：Jmeter，QPS
+RAG优化：
+接口文档（http json url request response）
+设计文档（技术架构，功能设计）、功能代码及测试成果
+技术组件：大模型， Mysql, redis, Milvus, BEG-m3, BGE-rerank, RAGAS
+RAG:LangChain（6大功能）， LlamaIndex, Dify, LightRAG, LinerRAG
+PDF:PyMuPDF(fitz), 图片文字识别 PaddleOCR, 多模态大模型。 PDFPlumber(表格)， minerU, Paddle-OCR-VL
+RAG:分块：固定长度，句子， 段落， 标题， 语义
+RAG优化：{
+混合检索， 重排序，
+多路召回(从不同的数据源查询数据)：Milvus, Mysql, Neo4J, MongoDB, Redis, 互联网， ClickHouse
+分块优化，
+提示词优化，
+Embedding--Model优化（BGE-m3，微调），
+数据（包括清洗）优化，
+生成结果优化（后处理，效验），
+向量库优化，
+Query改写/扩写，
+余弦相似度得分的过滤，
+大模型优化
+切得好、向量准、召回全、重排精、prompt 稳、少幻觉，就是 RAG 优化
+
+性能优化：{
+硬件优化，缓存， 代码逻辑优化， 流式输出
+}
+}
+
+日志：用python 的 logging的包

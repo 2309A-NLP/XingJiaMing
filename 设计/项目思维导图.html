@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>多角色智能问答系统 - 项目思维导图</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:linear-gradient(135deg,#0a0a2e 0%,#1a1a4e 30%,#0d2137 70%,#0a0a2e 100%);color:#e0e0e0;font-family:'Microsoft YaHei','PingFang SC',sans-serif;min-height:100vh;overflow-x:hidden}
+.bg-particles{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0}
+.particle{position:absolute;border-radius:50%;animation:float 8s infinite ease-in-out}
+@keyframes float{0%,100%{transform:translateY(0) scale(1);opacity:.3}50%{transform:translateY(-30px) scale(1.1);opacity:.6}}
+.header{text-align:center;padding:40px 20px 20px;position:relative;z-index:1}
+.header h1{font-size:2.5em;background:linear-gradient(90deg,#00d4ff,#7b68ee,#ff6ec7,#00d4ff);background-size:300%;-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:shimmer 4s linear infinite}
+@keyframes shimmer{0%{background-position:0%}100%{background-position:300%}}
+.header p{color:#8892b0;font-size:1.1em;margin-top:8px}
+.controls{display:flex;justify-content:center;gap:12px;margin:15px 0;position:relative;z-index:1;flex-wrap:wrap}
+.controls button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);color:#ccd6f6;padding:8px 20px;border-radius:20px;cursor:pointer;font-size:.9em;transition:.3s}
+.controls button:hover{background:rgba(100,100,255,.25);border-color:rgba(100,100,255,.5)}
+.controls button.active{background:rgba(0,212,255,.2);border-color:#00d4ff;color:#00d4ff}
+.mindmap{max-width:1400px;margin:0 auto;padding:20px;position:relative;z-index:1}
+.node{margin:6px 0;transition:all .4s cubic-bezier(.4,0,.2,1)}
+.node-header{display:flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;cursor:pointer;transition:all .3s;position:relative;user-select:none}
+.node-header:hover{transform:translateX(6px);filter:brightness(1.2)}
+.node-header::before{content:'';position:absolute;left:0;top:0;width:100%;height:100%;border-radius:12px;opacity:0;transition:opacity .3s}
+.node-header:hover::before{opacity:.08;background:#fff}
+.node-icon{font-size:1.3em;width:28px;text-align:center;flex-shrink:0}
+.node-title{font-weight:600;font-size:1.05em;flex-grow:1}
+.node-badge{font-size:.7em;padding:2px 8px;border-radius:10px;background:rgba(255,255,255,.1);color:#8892b0;flex-shrink:0}
+.node-toggle{width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.7em;transition:transform .3s;color:#8892b0}
+.node-toggle.open{transform:rotate(90deg)}
+.node-children{margin-left:28px;border-left:2px solid rgba(255,255,255,.06);padding-left:16px;overflow:hidden;transition:max-height .5s ease,opacity .4s ease}
+.node-children.collapsed{max-height:0!important;opacity:0;pointer-events:none}
+.node-children.expanded{opacity:1}
+/* Color themes */
+.theme-root>.node-header{background:linear-gradient(135deg,rgba(0,212,255,.15),rgba(123,104,238,.15));border:1px solid rgba(0,212,255,.25);font-size:1.2em}
+.theme-blue>.node-header{background:linear-gradient(135deg,rgba(0,150,255,.1),rgba(0,100,200,.08));border:1px solid rgba(0,150,255,.2)}
+.theme-purple>.node-header{background:linear-gradient(135deg,rgba(150,100,255,.1),rgba(100,50,200,.08));border:1px solid rgba(150,100,255,.2)}
+.theme-green>.node-header{background:linear-gradient(135deg,rgba(0,200,150,.1),rgba(0,150,100,.08));border:1px solid rgba(0,200,150,.2)}
+.theme-orange>.node-header{background:linear-gradient(135deg,rgba(255,165,0,.1),rgba(200,120,0,.08));border:1px solid rgba(255,165,0,.2)}
+.theme-pink>.node-header{background:linear-gradient(135deg,rgba(255,110,199,.1),rgba(200,80,150,.08));border:1px solid rgba(255,110,199,.2)}
+.theme-cyan>.node-header{background:linear-gradient(135deg,rgba(0,200,255,.1),rgba(0,150,200,.08));border:1px solid rgba(0,200,255,.2)}
+.theme-red>.node-header{background:linear-gradient(135deg,rgba(255,80,80,.1),rgba(200,50,50,.08));border:1px solid rgba(255,80,80,.2)}
+.theme-yellow>.node-header{background:linear-gradient(135deg,rgba(255,220,50,.1),rgba(200,170,30,.08));border:1px solid rgba(255,220,50,.2)}
+.leaf{font-size:.9em;color:#8892b0;padding:6px 18px;display:flex;align-items:center;gap:8px;transition:all .3s}
+.leaf:hover{color:#ccd6f6;transform:translateX(4px)}
+.leaf::before{content:'›';color:#4a4a8a;font-weight:bold}
+.code-tag{background:rgba(0,212,255,.12);color:#7ec8e3;padding:2px 8px;border-radius:4px;font-size:.85em;font-family:'Cascadia Code','Fira Code',monospace}
+.footer{text-align:center;padding:40px 20px;color:#4a4a6a;font-size:.85em;position:relative;z-index:1}
+.search-box{display:flex;justify-content:center;margin:10px 0;position:relative;z-index:1}
+.search-box input{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);color:#ccd6f6;padding:10px 20px;border-radius:25px;width:320px;font-size:.95em;outline:none;transition:.3s}
+.search-box input:focus{border-color:rgba(0,212,255,.4);box-shadow:0 0 20px rgba(0,212,255,.1)}
+.search-box input::placeholder{color:#5a5a7a}
+.highlight{background:rgba(255,220,50,.25);border-radius:3px;padding:0 2px}
+.node.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="bg-particles" id="particles"></div>
+
+<div class="header">
+  <h1>🧠 多角色智能问答系统</h1>
+  <p>RAG-based Multi-Role Dialogue System · 项目架构思维导图</p>
+</div>
+
+<div class="controls">
+  <button onclick="expandAll()">📂 全部展开</button>
+  <button onclick="collapseAll()">📁 全部折叠</button>
+  <button onclick="expandToLevel(1)">L1</button>
+  <button onclick="expandToLevel(2)">L2</button>
+  <button onclick="expandToLevel(3)">L3</button>
+</div>
+
+<div class="search-box">
+  <input type="text" id="search" placeholder="🔍 搜索节点..." oninput="searchNodes(this.value)">
+</div>
+
+<div class="mindmap" id="mindmap"></div>
+
+<div class="footer">多角色智能问答系统 · RAG + FastAPI + Milvus + BGE-M3 · 2025</div>
+
+<script>
+const data = {
+  title: "多角色智能问答系统", icon: "🧠", theme: "root", badge: "RAG",
+  children: [
+    { title: "📋 项目概览", icon: "📋", theme: "blue", children: [
+      { title: "基于RAG的多角色智能对话平台", icon: "🎯", theme: "blue" },
+      { title: "支持3个专业角色", icon: "👥", theme: "blue" },
+      { title: "知识库检索增强生成", icon: "📚", theme: "blue" },
+      { title: "SSE流式对话 + 多格式文件解析", icon: "⚡", theme: "blue" }
+    ]},
+    { title: "🛠️ 技术栈", icon: "🛠️", theme: "purple", children: [
+      { title: "后端框架", icon: "⚙️", theme: "purple", children: [
+        { title: "FastAPI + Uvicorn", icon: "🚀", theme: "purple", badge: "Web" },
+        { title: "Nginx 反向代理", icon: "🌐", theme: "purple", badge: "Proxy" }
+      ]},
+      { title: "数据库", icon: "💾", theme: "purple", children: [
+        { title: "MySQL — 用户/角色/聊天记录", icon: "🐬", theme: "purple" },
+        { title: "Redis — 对话记忆缓存(TTL 300s) + SMS验证码", icon: "📮", theme: "purple" },
+        { title: "Milvus (Docker) — 向量数据库", icon: "📦", theme: "purple", badge: "Docker" }
+      ]},
+      { title: "AI / NLP", icon: "🤖", theme: "purple", children: [
+        { title: "BGE-M3 文本嵌入 (1024维)", icon: "📐", theme: "purple", badge: "Embedding" },
+        { title: "BGE-Reranker 精排重排序", icon: "🔀", theme: "purple", badge: "Rerank" },
+        { title: "DeepSeek V4-Flash API — LLM推理", icon: "💬", theme: "purple", badge: "LLM" }
+      ]},
+      { title: "安全", icon: "🔒", theme: "purple", children: [
+        { title: "JWT 认证 (auth.py)", icon: "🎫", theme: "purple" },
+        { title: "bcrypt 密码哈希", icon: "🔑", theme: "purple" },
+        { title: "slowapi 接口限流", icon: "⏱️", theme: "purple" }
+      ]}
+    ]},
+    { title: "📂 核心模块 (src/)", icon: "📂", theme: "green", children: [
+      { title: "fastapi_app.py", icon: "📄", theme: "green", badge: "1304行", children: [
+        { title: "API路由注册", icon: "🔗", theme: "green" },
+        { title: "RAG检索管线编排", icon: "🔄", theme: "green" },
+        { title: "SSE流式响应处理", icon: "📡", theme: "green" }
+      ]},
+      { title: "config/settings.py", icon: "⚙️", theme: "green", badge: "配置", children: [
+        { title: "全局配置管理", icon: "📋", theme: "green" }
+      ]},
+      { title: "db/ — 数据层", icon: "💾", theme: "green", children: [
+        { title: "mysql.py — 用户/角色/聊天CRUD", icon: "🐬", theme: "green" },
+        { title: "redis.py — 对话缓存 + SMS验证码", icon: "📮", theme: "green" }
+      ]},
+      { title: "rag/ — RAG管线", icon: "🔍", theme: "green", children: [
+        { title: "chunking.py — 文本分块 (500字)", icon: "✂️", theme: "green" },
+        { title: "embedding.py — BGE-M3 向量嵌入", icon: "📐", theme: "green" },
+        { title: "retrieval.py — Milvus 向量检索", icon: "🔎", theme: "green" },
+        { title: "rerank.py — BGE-Reranker 精排", icon: "🔀", theme: "green" },
+        { title: "load_file.py — 多格式加载 (PDF/DOCX/PPT/OCR)", icon: "📂", theme: "green" },
+        { title: "llm_chat.py — LLM对话 (遗留模块)", icon: "💬", theme: "green" }
+      ]},
+      { title: "utils/ — 工具层", icon: "🔧", theme: "green", children: [
+        { title: "auth.py — JWT认证", icon: "🎫", theme: "green" },
+        { title: "logger.py — 日志系统", icon: "📝", theme: "green" }
+      ]}
+    ]},
+    { title: "🎭 角色系统", icon: "🎭", theme: "pink", children: [
+      { title: "🧑‍⚖️ lawyer — 刑事律师「林律」", icon: "⚖️", theme: "pink", children: [
+        { title: "法律知识库 (law_rag)", icon: "📚", theme: "pink" }
+      ]},
+      { title: "🧑‍⚕️ psych — 心理咨询师「张心理」", icon: "🧘", theme: "pink", children: [
+        { title: "心理学知识库 (psychology_rag)", icon: "📚", theme: "pink" }
+      ]},
+      { title: "👨‍⚕️ doctor — 医学专家「刘医学」", icon: "🏥", theme: "pink", children: [
+        { title: "医学知识库 (medical_rag)", icon: "📚", theme: "pink" }
+      ]}
+    ]},
+    { title: "🌐 API接口 (14个)", icon: "🌐", theme: "cyan", children: [
+      { title: "基础接口", icon: "🏠", theme: "cyan", children: [
+        { title: "GET / — 首页", icon: "🔗", theme: "cyan" },
+        { title: "GET /api/docs — API文档", icon: "📖", theme: "cyan" },
+        { title: "GET /api/health — 健康检查", icon: "💓", theme: "cyan" }
+      ]},
+      { title: "认证接口", icon: "🔐", theme: "cyan", children: [
+        { title: "POST /api/register — 用户注册", icon: "📝", theme: "cyan" },
+        { title: "POST /api/login — 用户登录", icon: "🔑", theme: "cyan" },
+        { title: "POST /api/sms/send — 发送验证码", icon: "📱", theme: "cyan" },
+        { title: "POST /api/sms/verify — 验证码校验", icon: "✅", theme: "cyan" }
+      ]},
+      { title: "角色接口", icon: "🎭", theme: "cyan", children: [
+        { title: "GET /api/roles — 角色列表", icon: "📋", theme: "cyan" },
+        { title: "GET /api/character/{role_id} — 角色详情", icon: "👤", theme: "cyan" },
+        { title: "POST /api/user/role — 选择角色", icon: "🎯", theme: "cyan" }
+      ]},
+      { title: "对话接口", icon: "💬", theme: "cyan", children: [
+        { title: "POST /api/chat — 普通对话", icon: "📨", theme: "cyan" },
+        { title: "POST /api/chat/stream — SSE流式对话", icon: "📡", theme: "cyan" },
+        { title: "POST /api/chat/send — 发送消息", icon: "📤", theme: "cyan" },
+        { title: "DELETE /api/chat/history — 清除历史", icon: "🗑️", theme: "cyan" }
+      ]}
+    ]},
+    { title: "🗄️ 数据库设计", icon: "🗄️", theme: "orange", children: [
+      { title: "MySQL 表结构", icon: "🐬", theme: "orange", children: [
+        { title: "users", icon: "📊", theme: "orange", badge: "用户表", children: [
+          { title: "id · phone · name · password · role · created_at", icon: "📋", theme: "orange" }
+        ]},
+        { title: "characters", icon: "📊", theme: "orange", badge: "角色表", children: [
+          { title: "id · name · role_type · description · prompt_template · knowledge_base", icon: "📋", theme: "orange" }
+        ]},
+        { title: "chat_history", icon: "📊", theme: "orange", badge: "聊天表", children: [
+          { title: "id · user_id · character_id · role · content · created_at", icon: "📋", theme: "orange" }
+        ]}
+      ]},
+      { title: "Milvus 向量集合", icon: "📦", theme: "orange", children: [
+        { title: "law_rag — 法律 (1024维 L2)", icon: "⚖️", theme: "orange" },
+        { title: "psychology_rag — 心理 (1024维 L2)", icon: "🧘", theme: "orange" },
+        { title: "medical_rag — 医疗 (1024维 L2)", icon: "🏥", theme: "orange" }
+      ]}
+    ]},
+    { title: "🔄 RAG管线流程", icon: "🔄", theme: "red", children: [
+      { title: "① 用户提问", icon: "1️⃣", theme: "red" },
+      { title: "② 文本分块 (chunking 500字)", icon: "2️⃣", theme: "red" },
+      { title: "③ BGE-M3 向量嵌入 (1024d)", icon: "3️⃣", theme: "red" },
+      { title: "④ Milvus 向量检索 Top-K", icon: "4️⃣", theme: "red" },
+      { title: "⑤ BGE-Reranker 精排重排", icon: "5️⃣", theme: "red" },
+      { title: "⑥ Prompt模板 + 检索结果 + 上下文", icon: "6️⃣", theme: "red" },
+      { title: "⑦ DeepSeek LLM 生成回答", icon: "7️⃣", theme: "red" },
+      { title: "⑧ SSE流式返回客户端", icon: "8️⃣", theme: "red" }
+    ]},
+    { title: "📁 知识库数据", icon: "📁", theme: "yellow", children: [
+      { title: "PDF知识库文件", icon: "📄", theme: "yellow", children: [
+        { title: "法律知识PDF", icon: "⚖️", theme: "yellow" },
+        { title: "心理学知识PDF", icon: "🧘", theme: "yellow" },
+        { title: "医学知识PDF", icon: "🏥", theme: "yellow" }
+      ]},
+      { title: "对话模板", icon: "📝", theme: "yellow", children: [
+        { title: "角色Prompt模板 (PDF)", icon: "💬", theme: "yellow" }
+      ]},
+      { title: "文件加载支持", icon: "📂", theme: "yellow", children: [
+        { title: "PDF / DOCX / PPT / 图片OCR", icon: "🔧", theme: "yellow" }
+      ]}
+    ]},
+    { title: "🧪 测试与评估", icon: "🧪", theme: "cyan", children: [
+      { title: "20+ 测试文件", icon: "📄", theme: "cyan" },
+      { title: "RAGAS 评估得分: 0.83", icon: "📊", theme: "cyan", badge: "⭐" },
+      { title: "压力测试", icon: "💪", theme: "cyan" },
+      { title: "API接口测试", icon: "🔌", theme: "cyan" }
+    ]},
+    { title: "⚠️ 已知问题 & 优化", icon: "⚠️", theme: "red", children: [
+      { title: "llm_chat.py 为遗留模块", icon: "📦", theme: "red" },
+      { title: "fastapi_app.py 1304行需拆分", icon: "✂️", theme: "red" },
+      { title: "Redis缓存TTL策略优化", icon: "📮", theme: "red" },
+      { title: "向量检索性能调优", icon: "⚡", theme: "red" }
+    ]}
+  ]
+};
+
+function renderNode(node, depth=0) {
+  const hasChildren = node.children && node.children.length > 0;
+  const isLeaf = !hasChildren;
+  let html = `<div class="node ${isLeaf?'':'parent'}" data-depth="${depth}">`;
+  html += `<div class="node-header theme-${node.theme||'blue'}" onclick="${hasChildren?'toggleNode(this)':''}">`;
+  if(hasChildren) html += `<span class="node-toggle open">▶</span>`;
+  html += `<span class="node-icon">${node.icon||'📌'}</span>`;
+  html += `<span class="node-title">${node.title}</span>`;
+  if(node.badge) html += `<span class="node-badge">${node.badge}</span>`;
+  html += `</div>`;
+  if(hasChildren) {
+    html += `<div class="node-children expanded">`;
+    node.children.forEach(c => html += renderNode(c, depth+1));
+    html += `</div>`;
+  }
+  html += `</div>`;
+  return html;
+}
+
+document.getElementById('mindmap').innerHTML = renderNode(data);
+
+function toggleNode(el) {
+  const children = el.nextElementSibling;
+  const toggle = el.querySelector('.node-toggle');
+  if(!children) return;
+  if(children.classList.contains('expanded')) {
+    children.classList.remove('expanded');
+    children.classList.add('collapsed');
+    toggle.classList.remove('open');
+  } else {
+    children.classList.remove('collapsed');
+    children.classList.add('expanded');
+    toggle.classList.add('open');
+  }
+}
+
+function expandAll() {
+  document.querySelectorAll('.node-children').forEach(el => {
+    el.classList.remove('collapsed'); el.classList.add('expanded');
+  });
+  document.querySelectorAll('.node-toggle').forEach(el => el.classList.add('open'));
+}
+function collapseAll() {
+  document.querySelectorAll('.node-children').forEach(el => {
+    el.classList.remove('expanded'); el.classList.add('collapsed');
+  });
+  document.querySelectorAll('.node-toggle').forEach(el => el.classList.remove('open'));
+}
+function expandToLevel(level) {
+  document.querySelectorAll('.node').forEach(el => {
+    const d = parseInt(el.dataset.depth);
+    const children = el.querySelector(':scope > .node-children');
+    const toggle = el.querySelector(':scope > .node-header > .node-toggle');
+    if(children) {
+      if(d < level) {
+        children.classList.remove('collapsed'); children.classList.add('expanded');
+        if(toggle) toggle.classList.add('open');
+      } else {
+        children.classList.remove('expanded'); children.classList.add('collapsed');
+        if(toggle) toggle.classList.remove('open');
+      }
+    }
+  });
+}
+
+function searchNodes(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('.node').forEach(el => {
+    const title = el.querySelector(':scope > .node-header .node-title');
+    if(!title) return;
+    const text = title.textContent.toLowerCase();
+    if(!q) { el.classList.remove('hidden'); return; }
+    if(text.includes(q)) {
+      el.classList.remove('hidden');
+      let parent = el.parentElement.closest('.node');
+      while(parent) {
+        parent.classList.remove('hidden');
+        const ch = parent.querySelector(':scope > .node-children');
+        const tg = parent.querySelector(':scope > .node-header .node-toggle');
+        if(ch){ch.classList.remove('collapsed');ch.classList.add('expanded');}
+        if(tg)tg.classList.add('open');
+        parent = parent.parentElement.closest('.node');
+      }
+    } else {
+      if(!el.querySelector('.node')) el.classList.add('hidden');
+    }
+  });
+}
+
+// particles
+(function(){
+  const c=document.getElementById('particles');
+  const colors=['#00d4ff','#7b68ee','#ff6ec7','#4ecdc4','#45b7d1'];
+  for(let i=0;i<25;i++){
+    const p=document.createElement('div');p.className='particle';
+    const s=Math.random()*6+2;
+    p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;top:${Math.random()*100}%;background:${colors[i%5]};animation-delay:${Math.random()*8}s;animation-duration:${6+Math.random()*6}s`;
+    c.appendChild(p);
+  }
+})();
+</script>
+</body>
+</html>

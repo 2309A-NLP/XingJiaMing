@@ -1,0 +1,364 @@
+{
+  "test_time": "2026-05-06 15:39:03",
+  "base_url": "http://127.0.0.1:8000",
+  "cpu_cores": 2,
+  "reports": [
+    {
+      "name": "GET Roles (基准)",
+      "endpoint": "GET /api/roles",
+      "total_requests": 200,
+      "concurrency": 20,
+      "duration_sec": 0.3,
+      "qps": 662.49,
+      "latency_ms": {
+        "min": 13.42,
+        "avg": 28.85,
+        "p50": 29.11,
+        "p75": 30.55,
+        "p90": 32.55,
+        "p95": 33.91,
+        "p99": 35.63,
+        "max": 36.79
+      },
+      "success_count": 200,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "GET Character/lawyer",
+      "endpoint": "GET /api/character/lawyer",
+      "total_requests": 100,
+      "concurrency": 20,
+      "duration_sec": 0.14,
+      "qps": 704.94,
+      "latency_ms": {
+        "min": 8.89,
+        "avg": 25.71,
+        "p50": 26.92,
+        "p75": 27.94,
+        "p90": 29.65,
+        "p95": 30.31,
+        "p99": 30.73,
+        "max": 30.73
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "GET Character/doctor",
+      "endpoint": "GET /api/character/doctor",
+      "total_requests": 100,
+      "concurrency": 20,
+      "duration_sec": 0.15,
+      "qps": 672.48,
+      "latency_ms": {
+        "min": 7.55,
+        "avg": 27.19,
+        "p50": 29.31,
+        "p75": 29.87,
+        "p90": 30.28,
+        "p95": 30.39,
+        "p99": 30.85,
+        "max": 30.85
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "GET Character/psych",
+      "endpoint": "GET /api/character/psych",
+      "total_requests": 100,
+      "concurrency": 20,
+      "duration_sec": 0.17,
+      "qps": 590.62,
+      "latency_ms": {
+        "min": 7.04,
+        "avg": 30.29,
+        "p50": 31.1,
+        "p75": 35.63,
+        "p90": 40.17,
+        "p95": 42.09,
+        "p99": 44.41,
+        "max": 44.41
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "GET Roles (阶梯加压) (并发=10)",
+      "endpoint": "GET /api/roles",
+      "total_requests": 100,
+      "concurrency": 10,
+      "duration_sec": 0.14,
+      "qps": 694.12,
+      "latency_ms": {
+        "min": 7.1,
+        "avg": 13.71,
+        "p50": 14.22,
+        "p75": 14.42,
+        "p90": 14.8,
+        "p95": 14.94,
+        "p99": 15.45,
+        "max": 15.45
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "GET Roles (阶梯加压) (并发=20)",
+      "endpoint": "GET /api/roles",
+      "total_requests": 100,
+      "concurrency": 20,
+      "duration_sec": 0.15,
+      "qps": 675.71,
+      "latency_ms": {
+        "min": 10.89,
+        "avg": 26.86,
+        "p50": 28.64,
+        "p75": 29.06,
+        "p90": 29.69,
+        "p95": 29.8,
+        "p99": 33.42,
+        "max": 33.42
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "GET Roles (阶梯加压) (并发=50)",
+      "endpoint": "GET /api/roles",
+      "total_requests": 100,
+      "concurrency": 50,
+      "duration_sec": 0.15,
+      "qps": 689.11,
+      "latency_ms": {
+        "min": 16.26,
+        "avg": 57.34,
+        "p50": 63.03,
+        "p75": 68.74,
+        "p90": 72.71,
+        "p95": 75.68,
+        "p99": 78.06,
+        "max": 78.06
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "GET Roles (阶梯加压) (并发=100)",
+      "endpoint": "GET /api/roles",
+      "total_requests": 100,
+      "concurrency": 100,
+      "duration_sec": 0.13,
+      "qps": 750.07,
+      "latency_ms": {
+        "min": 31.28,
+        "avg": 75.83,
+        "p50": 77.21,
+        "p75": 95.65,
+        "p90": 106.27,
+        "p95": 109.93,
+        "p99": 113.03,
+        "max": 113.03
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "POST Login",
+      "endpoint": "POST /api/login",
+      "total_requests": 100,
+      "concurrency": 20,
+      "duration_sec": 0.15,
+      "qps": 650.56,
+      "latency_ms": {
+        "min": 9.55,
+        "avg": 28.06,
+        "p50": 29.41,
+        "p75": 30.8,
+        "p90": 31.14,
+        "p95": 32.12,
+        "p99": 34.67,
+        "max": 34.67
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "POST SMS Send",
+      "endpoint": "POST /api/sms/send?phone=13800138000",
+      "total_requests": 100,
+      "concurrency": 20,
+      "duration_sec": 0.12,
+      "qps": 844.02,
+      "latency_ms": {
+        "min": 15.34,
+        "avg": 21.36,
+        "p50": 20.24,
+        "p75": 24.52,
+        "p90": 25.76,
+        "p95": 26.97,
+        "p99": 28.16,
+        "max": 28.16
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "POST Login (阶梯加压) (并发=10)",
+      "endpoint": "POST /api/login",
+      "total_requests": 100,
+      "concurrency": 10,
+      "duration_sec": 0.15,
+      "qps": 652.79,
+      "latency_ms": {
+        "min": 6.2,
+        "avg": 14.49,
+        "p50": 14.59,
+        "p75": 15.24,
+        "p90": 16.49,
+        "p95": 16.83,
+        "p99": 17.3,
+        "max": 17.3
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "POST Login (阶梯加压) (并发=20)",
+      "endpoint": "POST /api/login",
+      "total_requests": 100,
+      "concurrency": 20,
+      "duration_sec": 0.15,
+      "qps": 662.09,
+      "latency_ms": {
+        "min": 9.55,
+        "avg": 27.47,
+        "p50": 29.62,
+        "p75": 29.97,
+        "p90": 30.69,
+        "p95": 30.86,
+        "p99": 31.39,
+        "max": 31.39
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "POST Login (阶梯加压) (并发=50)",
+      "endpoint": "POST /api/login",
+      "total_requests": 100,
+      "concurrency": 50,
+      "duration_sec": 0.15,
+      "qps": 682.79,
+      "latency_ms": {
+        "min": 18.64,
+        "avg": 57.99,
+        "p50": 62.41,
+        "p75": 69.76,
+        "p90": 74.04,
+        "p95": 75.64,
+        "p99": 77.85,
+        "max": 77.85
+      },
+      "success_count": 100,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "POST Chat (lawyer)",
+      "endpoint": "POST /api/chat",
+      "total_requests": 50,
+      "concurrency": 5,
+      "duration_sec": 988.44,
+      "qps": 0.05,
+      "latency_ms": {
+        "min": 23145.85,
+        "avg": 82493.29,
+        "p50": 84138.14,
+        "p75": 102921.93,
+        "p90": 109529.75,
+        "p95": 116346.23,
+        "p99": 120224.71,
+        "max": 120224.71
+      },
+      "success_count": 35,
+      "fail_count": 15,
+      "error_rate": 30.0
+    },
+    {
+      "name": "POST Chat (mixed roles)",
+      "endpoint": "POST /api/chat",
+      "total_requests": 10,
+      "concurrency": 3,
+      "duration_sec": 272.8,
+      "qps": 0.04,
+      "latency_ms": {
+        "min": 33851.48,
+        "avg": 74648.45,
+        "p50": 77693.03,
+        "p75": 84123.49,
+        "p90": 92454.33,
+        "p95": 92454.33,
+        "p99": 92454.33,
+        "max": 92454.33
+      },
+      "success_count": 10,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "POST Chat/Send (frontend)",
+      "endpoint": "POST /api/chat/send",
+      "total_requests": 8,
+      "concurrency": 3,
+      "duration_sec": 124.46,
+      "qps": 0.06,
+      "latency_ms": {
+        "min": 25915.72,
+        "avg": 41569.16,
+        "p50": 45353.48,
+        "p75": 48559.69,
+        "p90": 50088.66,
+        "p95": 50088.66,
+        "p99": 50088.66,
+        "max": 50088.66
+      },
+      "success_count": 8,
+      "fail_count": 0,
+      "error_rate": 0.0
+    },
+    {
+      "name": "POST Chat (真实15题全量)",
+      "endpoint": "POST /api/chat",
+      "total_requests": 15,
+      "concurrency": 3,
+      "duration_sec": 402.3,
+      "qps": 0.04,
+      "latency_ms": {
+        "min": 13340.18,
+        "avg": 74363.32,
+        "p50": 87454.4,
+        "p75": 94802.69,
+        "p90": 100419.51,
+        "p95": 100444.33,
+        "p99": 100444.33,
+        "max": 100444.33
+      },
+      "success_count": 15,
+      "fail_count": 0,
+      "error_rate": 0.0
+    }
+  ]
+}
