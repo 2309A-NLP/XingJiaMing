@@ -1,0 +1,56 @@
+﻿[
+  {
+    "id": "bug001",
+    "type": "api",
+    "description": "QueryRequest 缺少 language 字段",
+    "check_method": "check_query_request_language",
+    "severity": "critical",
+    "created_at": "2026-06-01",
+    "status": "fixed"
+  },
+  {
+    "id": "bug002", 
+    "type": "api",
+    "description": "bm25_query 变量未定义",
+    "check_method": "check_bm25_query_defined",
+    "severity": "critical",
+    "created_at": "2026-06-01",
+    "status": "fixed"
+  },
+  {
+    "id": "bug003",
+    "type": "frontend",
+    "description": "CompareButton 的 question 查找逻辑错误",
+    "check_method": "check_compare_button_question",
+    "severity": "medium",
+    "created_at": "2026-06-01",
+    "status": "fixed"
+  },
+  {
+    "id": "bug004",
+    "type": "frontend",
+    "description": "queryCompare 缺少 language 参数",
+    "check_method": "check_query_compare_language",
+    "severity": "medium",
+    "created_at": "2026-06-01",
+    "status": "fixed"
+  },
+  {
+    "id": "bug005",
+    "type": "frontend",
+    "description": "翻译框 translation-box 未显示",
+    "check_method": "check_translation_box",
+    "severity": "medium",
+    "created_at": "2026-06-01",
+    "status": "fixed"
+  },
+  {
+    "id": "bug006",
+    "type": "frontend",
+    "description": "响应时间计时不准确",
+    "check_method": "check_response_time_accuracy",
+    "severity": "low",
+    "created_at": "2026-06-01",
+    "status": "fixed"
+  }
+]

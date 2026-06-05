@@ -1,0 +1,116 @@
+{
+  "comment": "敏感信息词库 - 可自由增删改",
+  "version": "1.0.0",
+  "patterns": {
+    "id_card": {
+      "enabled": true,
+      "description": "身份证号（优先匹配）",
+      "rules": [
+        "(?<!\\d)\\d{17}[\\dXx](?!\\d)",
+        "\\d{6}\\s?\\d{8}\\s?[\\dXx]"
+      ],
+      "replacement": "[脱敏身份证]"
+    },
+    "bank_card": {
+      "enabled": true,
+      "description": "银行卡号（优先匹配）",
+      "rules": [
+        "(?<!\\d)\\d{16,19}(?!\\d)"
+      ],
+      "replacement": "[脱敏银行卡]"
+    },
+    "phone": {
+      "enabled": true,
+      "description": "手机号/电话/400",
+      "rules": [
+        "(?<!\\d)1[3-9]\\d{9}(?!\\d)",
+        "0\\d{2,3}-?\\d{7,8}",
+        "400-?\\d{3,8}"
+      ],
+      "replacement": "[脱敏电话]"
+    },
+    "email": {
+      "enabled": true,
+      "description": "邮箱地址",
+      "rules": [
+        "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
+      ],
+      "replacement": "[脱敏邮箱]"
+    },
+    "ip_address": {
+      "enabled": true,
+      "description": "IP地址",
+      "rules": [
+        "\\b(?:\\d{1,3}\\.){3}\\d{1,3}\\b"
+      ],
+      "replacement": "[脱敏IP]"
+    },
+    "qq": {
+      "enabled": true,
+      "description": "QQ号",
+      "rules": [
+        "(?<!\\d)[1-9]\\d{7,9}(?!\\d)"
+      ],
+      "replacement": "[脱敏QQ]"
+    }
+  },
+  "sensitive_words": {
+    "politics": {
+      "enabled": true,
+      "description": "政治敏感词",
+      "words": [
+        "法轮功",
+        "六四事件",
+        "台独",
+        "藏独",
+        "疆独"
+      ],
+      "replacement": "[敏感词已过滤]"
+    },
+    "drugs": {
+      "enabled": true,
+      "description": "毒品相关",
+      "words": [
+        "毒品",
+        "冰毒",
+        "海洛因",
+        "可卡因",
+        "摇头丸",
+        "大麻"
+      ],
+      "replacement": "[违法内容已过滤]"
+    },
+    "prostitution": {
+      "enabled": true,
+      "description": "色情相关",
+      "words": [
+        "卖淫",
+        "嫖娼",
+        "裸聊",
+        "色情"
+      ],
+      "replacement": "[违法内容已过滤]"
+    },
+    "gambling": {
+      "enabled": true,
+      "description": "赌博相关",
+      "words": [
+        "赌博",
+        "赌场",
+        "赌球",
+        "六合彩"
+      ],
+      "replacement": "[违法内容已过滤]"
+    },
+    "violence": {
+      "enabled": true,
+      "description": "暴力相关",
+      "words": [
+        "杀人",
+        "恐怖袭击",
+        "爆炸物"
+      ],
+      "replacement": "[违法内容已过滤]"
+    }
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "test_date": "2026-06-05 10:11:52",
+  "metrics": {
+    "faithfulness": 0.874,
+    "answer_relevancy": 0.805,
+    "context_precision": 1.0,
+    "context_recall": 0.782
+  },
+  "questions_count": 10,
+  "note": "简化版 RAGAS 评估，使用近似计算方法"
+}

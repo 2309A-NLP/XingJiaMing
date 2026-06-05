@@ -1,0 +1,52 @@
+[
+    {
+        "question": "平安银行2019年的营业收入是多少？",
+        "expected_keywords": ["营业收入", "1,379.58", "1379.58", "亿"],
+        "category": "financial"
+    },
+    {
+        "question": "招商银行2019年的总资产是多少？",
+        "expected_keywords": ["总资产", "万亿", "7.42"],
+        "category": "financial"
+    },
+    {
+        "question": "平安银行2019年的董事长和行长分别是谁？",
+        "expected_keywords": ["谢永林", "胡跃飞"],
+        "category": "management"
+    },
+    {
+        "question": "中信证券2020年的营业收入是多少？",
+        "expected_keywords": ["营业收入", "亿"],
+        "category": "financial"
+    },
+    {
+        "question": "中国人寿2020年的净利润是多少？",
+        "expected_keywords": ["净利润", "亿"],
+        "category": "financial"
+    },
+    {
+        "question": "中国平安2019年的营业收入是多少？",
+        "expected_keywords": ["营业收入", "亿"],
+        "category": "financial"
+    },
+    {
+        "question": "华泰证券2021年的总资产是多少？",
+        "expected_keywords": ["总资产", "亿"],
+        "category": "financial"
+    },
+    {
+        "question": "国泰君安2021年的营业收入是多少？",
+        "expected_keywords": ["营业收入", "亿"],
+        "category": "financial"
+    },
+    {
+        "question": "中国太保2021年的净利润是多少？",
+        "expected_keywords": ["净利润", "亿"],
+        "category": "financial"
+    },
+    {
+        "question": "平安银行的员工人数有多少？",
+        "expected_keywords": ["员工", "人"],
+        "category": "hr"
+    }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "id": 1,
+    "question": "平安银行2019年的营业收入是多少？",
+    "ground_truth": "平安银行2019年实现营业收入1,379.58亿元，同比增长18.2%。",
+    "expected_keywords": ["1,379.58", "1379.58", "营业收入", "18.2%"],
+    "expected_sources": ["招股说明书1"],
+    "category": "financial",
+    "difficulty": "easy"
+  },
+  {
+    "id": 2,
+    "question": "平安银行2019年的净利润和不良贷款率分别是多少？",
+    "ground_truth": "平安银行2019年净利润281.95亿元，同比增长13.6%；不良贷款率1.65%，较上年末下降0.10个百分点。",
+    "expected_keywords": ["281.95", "净利润", "1.65", "不良贷款率"],
+    "expected_sources": ["招股说明书1"],
+    "category": "financial",
+    "difficulty": "medium"
+  },
+  {
+    "id": 3,
+    "question": "招商银行2019年的总资产和营业收入分别是多少？",
+    "ground_truth": "招商银行2019年总资产达7.42万亿元，较上年末增长9.95%；全年实现营业收入2,697.03亿元，同比增长8.51%。",
+    "expected_keywords": ["7.42", "万亿", "2,697.03", "营业收入"],
+    "expected_sources": ["招股说明书1"],
+    "category": "financial",
+    "difficulty": "medium"
+  },
+  {
+    "id": 4,
+    "question": "中国邮政储蓄银行的不良贷款率和拨备覆盖率分别是多少？",
+    "ground_truth": "中国邮政储蓄银行不良贷款率0.86%，拨备覆盖率389.45%。",
+    "expected_keywords": ["0.86", "不良贷款率", "389.45", "拨备覆盖率"],
+    "expected_sources": ["招股说明书1"],
+    "category": "risk",
+    "difficulty": "easy"
+  },
+  {
+    "id": 5,
+    "question": "中信证券2020年的总资产和营业收入分别是多少？",
+    "ground_truth": "中信证券2020年总资产达1.05万亿元，较年初增长33.00%，成为国内首家资产规模过万亿元的证券公司；全年实现营业收入543.83亿元。",
+    "expected_keywords": ["1.05", "万亿", "543.83", "营业收入", "33"],
+    "expected_sources": ["招股说明书1"],
+    "category": "financial",
+    "difficulty": "medium"
+  },
+  {
+    "id": 6,
+    "question": "招商证券2021年的营业收入是多少？同比增长多少？",
+    "ground_truth": "招商证券2021年实现营业收入294.29亿元，同比增长21.22%。",
+    "expected_keywords": ["294.29", "营业收入", "21.22"],
+    "expected_sources": ["招股说明书1"],
+    "category": "financial",
+    "difficulty": "easy"
+  },
+  {
+    "id": 7,
+    "question": "国泰君安证券的董事长是谁？",
+    "ground_truth": "国泰君安证券的董事长是贺青。",
+    "expected_keywords": ["贺青", "董事长"],
+    "expected_sources": ["招股说明书1"],
+    "category": "basic",
+    "difficulty": "easy"
+  },
+  {
+    "id": 8,
+    "question": "中国邮政储蓄银行的总资产规模是多少？",
+    "ground_truth": "中国邮政储蓄银行总资产规模达10.22万亿元，总负债规模达9.67万亿元。",
+    "expected_keywords": ["10.22", "万亿", "总资产"],
+    "expected_sources": ["招股说明书1"],
+    "category": "financial",
+    "difficulty": "easy"
+  },
+  {
+    "id": 9,
+    "question": "平安银行2019年的董事长和行长分别是谁？",
+    "ground_truth": "平安银行2019年董事长是谢永林，行长是胡跃飞。",
+    "expected_keywords": ["谢永林", "胡跃飞", "董事长", "行长"],
+    "expected_sources": ["招股说明书1"],
+    "category": "basic",
+    "difficulty": "easy"
+  },
+  {
+    "id": 10,
+    "question": "中信证券2020年每10股派发现金红利多少元？",
+    "ground_truth": "中信证券2020年每10股派发现金红利人民币4.00元（含税）。",
+    "expected_keywords": ["4.00", "现金红利", "10股"],
+    "expected_sources": ["招股说明书1"],
+    "category": "financial",
+    "difficulty": "easy"
+  }
+]

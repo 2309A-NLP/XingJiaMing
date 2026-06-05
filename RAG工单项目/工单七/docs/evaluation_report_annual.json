@@ -1,0 +1,121 @@
+{
+  "test_date": "2026-06-05 09:58:47",
+  "test_cases_count": 10,
+  "metrics": {
+    "avg_precision": 0.975,
+    "avg_recall": 1.0,
+    "avg_response_time_ms": 2557.9,
+    "precision_at_90": 0.9,
+    "recall_at_95": 1.0,
+    "response_time_under_3s": 0.8
+  },
+  "category_scores": {
+    "financial": {
+      "precision": 0.96875,
+      "recall": 1.0,
+      "time": 2632.052779197693
+    },
+    "management": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "time": 2778.256893157959
+    },
+    "hr": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "time": 1744.0359592437744
+    }
+  },
+  "details": [
+    {
+      "question": "平安银行2019年的营业收入是多少？",
+      "answer": "平安银行2019年的营业收入为1,379.58亿元（同比增长18.2%）。",
+      "precision": 0.75,
+      "recall": 1.0,
+      "response_time_ms": 5852.7,
+      "keyword_hits": 3,
+      "keyword_total": 4
+    },
+    {
+      "question": "招商银行2019年的总资产是多少？",
+      "answer": "招商银行2019年末总资产为7.42万亿元，较上年末增长9.95%。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 1597.5,
+      "keyword_hits": 3,
+      "keyword_total": 3
+    },
+    {
+      "question": "平安银行2019年的董事长和行长分别是谁？",
+      "answer": "平安银行2019年的董事长是谢永林，行长是胡跃飞。\n\n- **董事长**：谢永林先生，非执行董事、董事长，1968年9月出生，南京大学管理学博士、理学硕士。2016年12月至今，任平安银行股份有限公司董事长、党委书记。\n- **行长**：胡跃飞先生，执行董事、行长，1962年出生，中南财经政法大学经济学硕士。2016年12月至今，任平安银行行长。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 2778.3,
+      "keyword_hits": 2,
+      "keyword_total": 2
+    },
+    {
+      "question": "中信证券2020年的营业收入是多少？",
+      "answer": "中信证券2020年的营业收入为 **54,382,730,241.56 元**（约543.83亿元）。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 3198.3,
+      "keyword_hits": 2,
+      "keyword_total": 2
+    },
+    {
+      "question": "中国人寿2020年的净利润是多少？",
+      "answer": "根据参考资料，中国人寿2020年的净利润为 **817 百万元**（即人民币8.17亿元）。该数据来源于主要控股参股公司情况中“中国人寿养老保险股份有限公司”的净利润数据（单位：人民币百万元）。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 2484.8,
+      "keyword_hits": 2,
+      "keyword_total": 2
+    },
+    {
+      "question": "中国平安2019年的营业收入是多少？",
+      "answer": "中国平安2019年的营业收入为**63,562百万元人民币**（即约635.62亿元）。该数据来源于公司利润表（2019年度）。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 2463.4,
+      "keyword_hits": 2,
+      "keyword_total": 2
+    },
+    {
+      "question": "华泰证券2021年的总资产是多少？",
+      "answer": "根据参考资料，华泰证券（即国泰君安）2021年的总资产为 **7,912.73亿元**（截至2021年12月31日）。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 2085.2,
+      "keyword_hits": 2,
+      "keyword_total": 2
+    },
+    {
+      "question": "国泰君安2021年的营业收入是多少？",
+      "answer": "国泰君安2021年实现营业收入428.17亿元，同比增长21.64%。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 2010.4,
+      "keyword_hits": 2,
+      "keyword_total": 2
+    },
+    {
+      "question": "中国太保2021年的净利润是多少？",
+      "answer": "中国太保2021年归属于母公司股东的净利润为268.34亿元（26,834百万元）。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 1364.2,
+      "keyword_hits": 2,
+      "keyword_total": 2
+    },
+    {
+      "question": "平安银行的员工人数有多少？",
+      "answer": "根据参考资料，平安银行2019年的员工情况如下：\n\n截至2019年12月31日，平安集团员工薪酬总额达591.44亿元，员工长期服务计划已覆盖31,026人，占员工总数的8.34%。但参考资料中未单独列出平安银行的员工人数，仅提供了平安集团整体的员工数据。",
+      "precision": 1.0,
+      "recall": 1.0,
+      "response_time_ms": 1744.0,
+      "keyword_hits": 2,
+      "keyword_total": 2
+    }
+  ]
+}

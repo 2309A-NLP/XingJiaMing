@@ -1,0 +1,61 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info
+*.egg
+dist
+build
+.eggs
+*.so
+
+# Virtual Environment
+.venv
+venv
+ENV
+
+# IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Windows
+*.bat
+*.exe
+Thumbs.db
+Desktop.ini
+
+# Logs
+logs/*.log
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+
+# Node modules (frontend build is in dist/)
+frontend/node_modules
+
+# Documentation (not needed in container)
+docs/
+*.md
+!README.md
+
+# Test files
+tests/
+
+# Original data (not needed in container, use volumes)
+data/ccf_competition/
+
+# Storage (will be mounted as volume)
+storage/
+
+# Models cache (will be mounted as volume)
+models_cache/

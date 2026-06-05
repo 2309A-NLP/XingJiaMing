@@ -1,0 +1,59 @@
+# RAG 金融问答系统 - Docker Compose 配置
+# 连接现有的 Milvus 和 Redis 容器
+# 服务：Backend (FastAPI) + Frontend (Nginx)
+
+name: rag-finance-qa
+
+services:
+  # ===========================================
+  # Backend API (FastAPI)
+  # ===========================================
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: rag-backend
+    ports:
+      - "8007:8007"
+    volumes:
+      - ./data:/app/data
+      - ./storage:/app/storage
+      - ./logs:/app/logs
+      # 挂载本地 AI 模型目录（根据实际路径修改）
+      - ${MODEL_DIR:-./models}:/models
+    environment:
+      # Milvus 配置（连接现有容器）
+      - MILVUS_HOST=host.docker.internal
+      - MILVUS_PORT=19530
+      # Redis 配置（连接现有容器）
+      - REDIS_HOST=host.docker.internal
+      - REDIS_PORT=6379
+      # 模型路径（容器内路径）
+      - EMBEDDING_MODEL_PATH=/models/BGE-M3
+      - EMBEDDING_MODELS=bge-m3:/models/BGE-M3,m3e:/models/model-m3e-base
+      - DEFAULT_EMBEDDING_MODEL=bge-m3
+      - RERANK_MODEL_PATH=/models/bge-reranker-base
+      # 服务配置
+      - API_HOST=0.0.0.0
+      - API_PORT=8007
+      - DATA_DIR=./data
+      - STORAGE_DIR=./storage
+    env_file:
+      - .env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  # ===========================================
+  # Frontend (Nginx) - 使用 8080 端口（80 被占用）
+  # ===========================================
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: rag-frontend
+    ports:
+      - "8080:80"
+    depends_on:
+      - backend
+    restart: unless-stopped

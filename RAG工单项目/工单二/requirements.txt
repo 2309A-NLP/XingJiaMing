@@ -1,0 +1,12 @@
+﻿# 核心依赖
+fastapi==0.136.3
+uvicorn==0.48.0
+python-dotenv==1.2.2
+pydantic==2.10.6
+openai==1.109.1
+pymilvus==3.0.0
+rank-bm25==0.2.2
+sentence-transformers==5.5.1
+torch @ file:///E:/%E6%A1%8C%E9%9D%A2/%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6/RAG%E5%B7%A5%E5%8D%95%E9%A1%B9%E7%9B%AE/%E5%B7%A5%E5%8D%951/torch-2.5.1%2Bcu121-cp310-cp310-win_amd64.whl#sha256=9b22d6d98aa56f9317902dec0e066814a6edba1aada90110ceea2bb0678df22f
+numpy==1.26.4
+tiktoken==0.13.0
