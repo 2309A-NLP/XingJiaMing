@@ -1,0 +1,39 @@
+# Core backend
+fastapi==0.136.3
+uvicorn==0.48.0
+python-dotenv==1.2.2
+pydantic==2.10.6
+openai==1.109.1
+pymilvus==2.3.4
+rank-bm25==0.2.2
+sentence-transformers==5.5.1
+transformers==4.51.3
+tokenizers==0.21.4
+huggingface-hub==0.36.2
+safetensors==0.7.0
+numpy==1.26.4
+sympy==1.13.1
+tiktoken==0.13.0
+jieba==0.42.1
+python-multipart==0.0.20
+marshmallow<4
+
+# Multi-turn memory
+redis==5.0.8
+
+# LightRAG graph support
+lightrag-hku>=1.5.0
+neo4j>=5.0.0
+
+# Evaluation
+ragas>=0.2.0
+
+# Testing
+pytest==9.1.0
+
+# GPU runtime used by the current validated setup
+torch==2.5.1+cu121
+torchvision==0.20.1+cu121
+
+# Install command example for the validated CUDA build:
+# pip install torch==2.5.1 torchvision==0.20.1 --index-url https://download.pytorch.org/whl/cu121

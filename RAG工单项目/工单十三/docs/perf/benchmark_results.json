@@ -1,0 +1,493 @@
+{
+  "summary": {
+    "iterations": 20,
+    "sample_size": 80,
+    "avg_total_ms": 415.6,
+    "p50_total_ms": 381,
+    "p95_total_ms": 582,
+    "p99_total_ms": 1172,
+    "under_3s_rate": 1.0
+  },
+  "runs": [
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 280,
+      "total_time_ms": 280,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 1306,
+      "total_time_ms": 1306,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 522,
+      "total_time_ms": 522,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 366,
+      "total_time_ms": 366,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 307,
+      "total_time_ms": 307,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 1172,
+      "total_time_ms": 1172,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 399,
+      "total_time_ms": 399,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 384,
+      "total_time_ms": 384,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 381,
+      "total_time_ms": 381,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 1116,
+      "total_time_ms": 1116,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 426,
+      "total_time_ms": 426,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 368,
+      "total_time_ms": 368,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 375,
+      "total_time_ms": 375,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 497,
+      "total_time_ms": 497,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 244,
+      "total_time_ms": 245,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 391,
+      "total_time_ms": 391,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 373,
+      "total_time_ms": 373,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 512,
+      "total_time_ms": 512,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 271,
+      "total_time_ms": 271,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 397,
+      "total_time_ms": 397,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 367,
+      "total_time_ms": 367,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 495,
+      "total_time_ms": 495,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 246,
+      "total_time_ms": 246,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 646,
+      "total_time_ms": 646,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 303,
+      "total_time_ms": 304,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 550,
+      "total_time_ms": 550,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 567,
+      "total_time_ms": 567,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 240,
+      "total_time_ms": 240,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 366,
+      "total_time_ms": 367,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 492,
+      "total_time_ms": 492,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 267,
+      "total_time_ms": 267,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 398,
+      "total_time_ms": 398,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 368,
+      "total_time_ms": 368,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 518,
+      "total_time_ms": 519,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 254,
+      "total_time_ms": 254,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 381,
+      "total_time_ms": 381,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 380,
+      "total_time_ms": 380,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 502,
+      "total_time_ms": 502,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 272,
+      "total_time_ms": 272,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 400,
+      "total_time_ms": 400,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 359,
+      "total_time_ms": 359,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 515,
+      "total_time_ms": 515,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 266,
+      "total_time_ms": 266,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 374,
+      "total_time_ms": 374,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 381,
+      "total_time_ms": 381,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 501,
+      "total_time_ms": 501,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 256,
+      "total_time_ms": 256,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 395,
+      "total_time_ms": 395,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 491,
+      "total_time_ms": 491,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 582,
+      "total_time_ms": 582,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 302,
+      "total_time_ms": 302,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 334,
+      "total_time_ms": 334,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 508,
+      "total_time_ms": 508,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 349,
+      "total_time_ms": 349,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 249,
+      "total_time_ms": 249,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 406,
+      "total_time_ms": 406,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 343,
+      "total_time_ms": 343,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 489,
+      "total_time_ms": 489,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 253,
+      "total_time_ms": 253,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 377,
+      "total_time_ms": 377,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 391,
+      "total_time_ms": 391,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 497,
+      "total_time_ms": 497,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 268,
+      "total_time_ms": 268,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 194,
+      "total_time_ms": 194,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 382,
+      "total_time_ms": 382,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 507,
+      "total_time_ms": 507,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 265,
+      "total_time_ms": 265,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 418,
+      "total_time_ms": 418,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 337,
+      "total_time_ms": 337,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 520,
+      "total_time_ms": 520,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 241,
+      "total_time_ms": 241,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 372,
+      "total_time_ms": 372,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 390,
+      "total_time_ms": 390,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 495,
+      "total_time_ms": 495,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 314,
+      "total_time_ms": 314,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 325,
+      "total_time_ms": 325,
+      "cache_hit": false
+    },
+    {
+      "question": "公司法定代表人是谁？",
+      "retrieval_time_ms": 375,
+      "total_time_ms": 375,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的注册资本是多少？",
+      "retrieval_time_ms": 494,
+      "total_time_ms": 494,
+      "cache_hit": false
+    },
+    {
+      "question": "公司的主营业务是什么？",
+      "retrieval_time_ms": 302,
+      "total_time_ms": 302,
+      "cache_hit": false
+    },
+    {
+      "question": "公司面临哪些经营风险？",
+      "retrieval_time_ms": 326,
+      "total_time_ms": 327,
+      "cache_hit": false
+    }
+  ]
+}

@@ -21,3 +21,10 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+# 大文件排除
+**/node_modules/
+**/model/*.safetensors
+**/lightrag_storage/*.json
+*.zip
+*.mp4
+**/ragflow/

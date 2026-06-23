@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Embedding 微调效果对比</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0f172a; color: #e2e8f0; padding: 40px 20px; }
+.container { max-width: 900px; margin: 0 auto; }
+h1 { text-align: center; font-size: 28px; margin-bottom: 8px; background: linear-gradient(135deg, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.subtitle { text-align: center; color: #94a3b8; margin-bottom: 40px; font-size: 14px; }
+.card { background: #1e293b; border-radius: 16px; padding: 32px; margin-bottom: 24px; border: 1px solid #334155; }
+.card h2 { font-size: 18px; margin-bottom: 24px; color: #f1f5f9; }
+.metrics { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.metric { background: #0f172a; border-radius: 12px; padding: 20px; text-align: center; }
+.metric .name { font-size: 13px; color: #94a3b8; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+.metric .values { display: flex; justify-content: center; align-items: center; gap: 16px; margin-bottom: 12px; }
+.metric .val { font-size: 32px; font-weight: 700; }
+.metric .old { color: #64748b; }
+.metric .new { color: #34d399; }
+.metric .arrow { color: #94a3b8; font-size: 20px; }
+.metric .change { font-size: 16px; font-weight: 600; }
+.metric .change.positive { color: #34d399; }
+.bar-container { height: 8px; background: #334155; border-radius: 4px; overflow: hidden; display: flex; }
+.bar { height: 100%; transition: width 1s ease; }
+.bar.old { background: #475569; border-radius: 4px 0 0 4px; }
+.bar.new { background: linear-gradient(90deg, #34d399, #38bdf8); border-radius: 0 4px 4px 0; }
+.conclusion { text-align: center; padding: 24px; background: linear-gradient(135deg, rgba(52,211,153,0.1), rgba(56,189,248,0.1)); border-radius: 12px; border: 1px solid rgba(52,211,153,0.3); }
+.conclusion .icon { font-size: 48px; margin-bottom: 12px; }
+.conclusion .text { font-size: 20px; font-weight: 600; color: #34d399; }
+.conclusion .detail { color: #94a3b8; margin-top: 8px; font-size: 14px; }
+.info { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 24px; }
+.info-item { background: #0f172a; border-radius: 8px; padding: 12px; text-align: center; }
+.info-item .label { font-size: 11px; color: #64748b; margin-bottom: 4px; }
+.info-item .value { font-size: 14px; font-weight: 600; color: #e2e8f0; }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Embedding 模型微调效果对比</h1>
+<p class="subtitle">BAAI/bge-base-zh-v1.5 · 金融领域数据微调 · 2026-06-08</p>
+
+<div class="card">
+<div class="info">
+<div class="info-item"><div class="label">基础模型</div><div class="value">bge-base-zh-v1.5</div></div>
+<div class="info-item"><div class="label">训练数据</div><div class="value">1,220 条</div></div>
+<div class="info-item"><div class="label">训练时间</div><div class="value">30 秒</div></div>
+</div>
+</div>
+
+<div class="card">
+<h2>📊 核心指标对比</h2>
+<div class="metrics">
+
+<div class="metric">
+  <div class="name">Recall@10<br><span style="font-size:11px;color:#475569">检索命中率</span></div>
+  <div class="values">
+    <span class="val old">0.5213</span>
+    <span class="arrow">→</span>
+    <span class="val new">0.5759</span>
+  </div>
+  <div class="change positive">▲ +10.5%</div>
+  <div class="bar-container" style="margin-top:12px">
+    <div class="bar old" style="width:52.129999999999995%"></div>
+  </div>
+  <div class="bar-container" style="margin-top:4px">
+    <div class="bar new" style="width:57.589999999999996%"></div>
+  </div>
+</div>
+
+<div class="metric">
+  <div class="name">MRR<br><span style="font-size:11px;color:#475569">平均倒数排名</span></div>
+  <div class="values">
+    <span class="val old">0.3023</span>
+    <span class="arrow">→</span>
+    <span class="val new">0.3630</span>
+  </div>
+  <div class="change positive">▲ +20.1%</div>
+  <div class="bar-container" style="margin-top:12px">
+    <div class="bar old" style="width:30.23%"></div>
+  </div>
+  <div class="bar-container" style="margin-top:4px">
+    <div class="bar new" style="width:36.3%"></div>
+  </div>
+</div>
+
+<div class="metric">
+  <div class="name">NDCG@10<br><span style="font-size:11px;color:#475569">排名质量</span></div>
+  <div class="values">
+    <span class="val old">0.3547</span>
+    <span class="arrow">→</span>
+    <span class="val new">0.4145</span>
+  </div>
+  <div class="change positive">▲ +16.9%</div>
+  <div class="bar-container" style="margin-top:12px">
+    <div class="bar old" style="width:35.47%"></div>
+  </div>
+  <div class="bar-container" style="margin-top:4px">
+    <div class="bar new" style="width:41.449999999999996%"></div>
+  </div>
+</div>
+
+<div class="metric">
+  <div class="name">Precision@10<br><span style="font-size:11px;color:#475569">精确率</span></div>
+  <div class="values">
+    <span class="val old">0.0522</span>
+    <span class="arrow">→</span>
+    <span class="val new">0.0577</span>
+  </div>
+  <div class="change positive">▲ +10.5%</div>
+  <div class="bar-container" style="margin-top:12px">
+    <div class="bar old" style="width:5.220000000000001%"></div>
+  </div>
+  <div class="bar-container" style="margin-top:4px">
+    <div class="bar new" style="width:5.7700000000000005%"></div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<div class="card">
+<div class="conclusion">
+<div class="icon">✅</div>
+<div class="text">微调有效 — 所有指标全面提升</div>
+<div class="detail">Recall@10 +10.5% · MRR +20.1% · NDCG@10 +16.9% · Precision@10 +10.5%</div>
+</div>
+</div>
+
+<div class="card">
+<h2>📈 指标说明</h2>
+<table style="width:100%;font-size:14px;border-collapse:collapse">
+<tr style="border-bottom:1px solid #334155;color:#94a3b8"><td style="padding:8px">Recall@10</td><td style="padding:8px">前10个检索结果中，命中了多少正确答案</td></tr>
+<tr style="border-bottom:1px solid #334155;color:#94a3b8"><td style="padding:8px">MRR</td><td style="padding:8px">第一个正确结果排在第几位（越靠前越好）</td></tr>
+<tr style="border-bottom:1px solid #334155;color:#94a3b8"><td style="padding:8px">NDCG@10</td><td style="padding:8px">排名质量（正确结果越靠前分越高）</td></tr>
+<tr style="color:#94a3b8"><td style="padding:8px">Precision@10</td><td style="padding:8px">前10个结果中有多少是正确的</td></tr>
+</table>
+</div>
+
+</div>
+
+<div class="card">
+<h2>🚀 优化方向</h2>
+<div style="display:grid;gap:12px">
+<div style="background:#0f172a;border-radius:8px;padding:16px;border-left:3px solid #34d399">
+<div style="font-weight:600;color:#34d399;margin-bottom:4px">⭐⭐⭐ 增加训练数据到5,000条</div>
+<div style="color:#94a3b8;font-size:13px">当前1,220条 → 扩充到5,000条，预期 +5-10%，成本：5-6小时LLM调用</div>
+</div>
+<div style="background:#0f172a;border-radius:8px;padding:16px;border-left:3px solid #34d399">
+<div style="font-weight:600;color:#34d399;margin-bottom:4px">⭐⭐⭐ 优化数据质量（过滤表格段落）</div>
+<div style="color:#94a3b8;font-size:13px">剔除表格/列表类型的训练样本，预期 +5-15%，成本：1小时改代码</div>
+</div>
+<div style="background:#0f172a;border-radius:8px;padding:16px;border-left:3px solid #38bdf8">
+<div style="font-weight:600;color:#38bdf8;margin-bottom:4px">⭐⭐ 训练3-5个epoch</div>
+<div style="color:#94a3b8;font-size:13px">当前仅1轮 → 增加到3-5轮，预期 +3-5%，需监控过拟合</div>
+</div>
+<div style="background:#0f172a;border-radius:8px;padding:16px;border-left:3px solid #38bdf8">
+<div style="font-weight:600;color:#38bdf8;margin-bottom:4px">⭐⭐ 加入专业金融术语数据</div>
+<div style="color:#94a3b8;font-size:13px">投资者问答、研报、新闻等，预期 +10-20%，需人工收集</div>
+</div>
+<div style="background:#0f172a;border-radius:8px;padding:16px;border-left:3px solid #818cf8">
+<div style="font-weight:600;color:#818cf8;margin-bottom:4px">⭐ 升级到bge-large-zh模型</div>
+<div style="color:#94a3b8;font-size:13px">110M → 326M参数，预期 +5-10%，需要更多显存</div>
+</div>
+</div>
+<div style="margin-top:16px;padding:12px;background:rgba(56,189,248,0.1);border-radius:8px;border:1px solid rgba(56,189,248,0.2)">
+<div style="font-size:13px;color:#38bdf8;font-weight:600">💡 推荐组合：增加数据 + 专业数据 + 多轮训练</div>
+<div style="font-size:12px;color:#94a3b8;margin-top:4px">预计可将 Recall@10 从 0.58 提升到 0.65-0.70</div>
+</div>
+</div>
+
+</body>
+</html>

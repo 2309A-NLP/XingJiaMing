@@ -1,0 +1,102 @@
+[
+  {
+    "index": 0,
+    "total_time_ms": 396,
+    "retrieval_time_ms": 396
+  },
+  {
+    "index": 1,
+    "total_time_ms": 397,
+    "retrieval_time_ms": 397
+  },
+  {
+    "index": 2,
+    "total_time_ms": 746,
+    "retrieval_time_ms": 746
+  },
+  {
+    "index": 3,
+    "total_time_ms": 347,
+    "retrieval_time_ms": 347
+  },
+  {
+    "index": 4,
+    "total_time_ms": 383,
+    "retrieval_time_ms": 383
+  },
+  {
+    "index": 5,
+    "total_time_ms": 392,
+    "retrieval_time_ms": 392
+  },
+  {
+    "index": 6,
+    "total_time_ms": 397,
+    "retrieval_time_ms": 397
+  },
+  {
+    "index": 7,
+    "total_time_ms": 398,
+    "retrieval_time_ms": 398
+  },
+  {
+    "index": 8,
+    "total_time_ms": 388,
+    "retrieval_time_ms": 388
+  },
+  {
+    "index": 9,
+    "total_time_ms": 397,
+    "retrieval_time_ms": 397
+  },
+  {
+    "index": 10,
+    "total_time_ms": 418,
+    "retrieval_time_ms": 418
+  },
+  {
+    "index": 11,
+    "total_time_ms": 443,
+    "retrieval_time_ms": 443
+  },
+  {
+    "index": 12,
+    "total_time_ms": 346,
+    "retrieval_time_ms": 345
+  },
+  {
+    "index": 13,
+    "total_time_ms": 379,
+    "retrieval_time_ms": 379
+  },
+  {
+    "index": 14,
+    "total_time_ms": 392,
+    "retrieval_time_ms": 392
+  },
+  {
+    "index": 15,
+    "total_time_ms": 389,
+    "retrieval_time_ms": 389
+  },
+  {
+    "index": 16,
+    "total_time_ms": 495,
+    "retrieval_time_ms": 495
+  },
+  {
+    "index": 17,
+    "total_time_ms": 395,
+    "retrieval_time_ms": 395
+  },
+  {
+    "index": 18,
+    "total_time_ms": 378,
+    "retrieval_time_ms": 378
+  },
+  {
+    "index": 19,
+    "total_time_ms": 513,
+    "retrieval_time_ms": 513
+  }
+]

@@ -1,0 +1,5 @@
+### 微调模型推理配置
+model_name_or_path: /root/autodl-tmp/Qwen2-VL-7B-Instruct
+adapter_name_or_path: /root/autodl-tmp/工单十六/output
+trust_remote_code: true
+template: qwen2_vl

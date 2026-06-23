@@ -1,0 +1,58 @@
+### Qwen2-VL-7B LoRA微调配置
+### 工单十六：调试与微调专用视觉语言模型
+
+## 模型配置
+model_name_or_path: /root/autodl-tmp/Qwen2-VL-7B-Instruct
+trust_remote_code: true
+
+## 微调方法
+stage: sft
+do_train: true
+finetuning_type: lora
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.05
+lora_target: all
+
+## 数据配置
+dataset: 微调训练数据
+dataset_dir: /root/autodl-tmp/工单十六
+template: qwen2_vl
+cutoff_len: 2048
+max_samples: 100
+overwrite_cache: true
+preprocessing_num_workers: 4
+
+## 图像配置
+image_max_pixels: 1003520  # 1280x784
+image_min_pixels: 3136     # 56x56
+video_max_pixels: 76800    # 不用视频
+crop_to_patches: true
+
+## 训练参数
+per_device_train_batch_size: 2
+gradient_accumulation_steps: 4
+learning_rate: 1.0e-4
+num_train_epochs: 3
+lr_scheduler_type: cosine
+warmup_ratio: 0.1
+bf16: true
+tf32: true
+
+## 优化器
+optim: adamw_torch
+adam_beta1: 0.9
+adam_beta2: 0.999
+adam_epsilon: 1.0e-8
+max_grad_norm: 1.0
+
+## 保存配置
+output_dir: /root/autodl-tmp/工单十六/output
+logging_steps: 10
+save_steps: 100
+save_total_limit: 3
+
+## 其他
+seed: 42
+dataloader_num_workers: 2
+report_to: none

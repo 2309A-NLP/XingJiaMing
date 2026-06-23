@@ -1,0 +1,30 @@
+{
+  "metrics": {
+    "recall_at_k": {
+      "base": 0.5213,
+      "finetuned": 0.5759,
+      "improvement": 0.0546,
+      "improvement_pct": 10.47
+    },
+    "mrr": {
+      "base": 0.3023,
+      "finetuned": 0.363,
+      "improvement": 0.0607,
+      "improvement_pct": 20.08
+    },
+    "ndcg_at_k": {
+      "base": 0.3547,
+      "finetuned": 0.4145,
+      "improvement": 0.0598,
+      "improvement_pct": 16.86
+    },
+    "precision_at_k": {
+      "base": 0.0522,
+      "finetuned": 0.0577,
+      "improvement": 0.0055,
+      "improvement_pct": 10.54
+    }
+  },
+  "conclusion": "微调有效",
+  "timestamp": "2026-06-08T15:23:19.609465"
+}

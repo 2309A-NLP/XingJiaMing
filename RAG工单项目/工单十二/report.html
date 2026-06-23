@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工单十二 - LightRAG知识图谱对比系统 技术报告</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0a0a1a; color: #e0e0e0; line-height: 1.6; }
+.container { max-width: 1200px; margin: 0 auto; padding: 40px 24px; }
+h1 { font-size: 36px; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 8px; }
+h2 { font-size: 24px; color: #a78bfa; margin: 40px 0 16px; border-left: 4px solid #7c3aed; padding-left: 12px; }
+h3 { font-size: 18px; color: #c4b5fd; margin: 24px 0 12px; }
+.subtitle { color: #888; font-size: 14px; margin-bottom: 32px; }
+.card { background: #1a1a2e; border: 1px solid #2a2a4a; border-radius: 12px; padding: 24px; margin: 16px 0; }
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+.stat-card { background: linear-gradient(135deg, #1a1a2e, #16213e); border: 1px solid #2a2a4a; border-radius: 12px; padding: 20px; text-align: center; }
+.stat-value { font-size: 36px; font-weight: 700; background: linear-gradient(135deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.stat-label { font-size: 13px; color: #888; margin-top: 4px; }
+table { width: 100%; border-collapse: collapse; margin: 16px 0; }
+th { background: #16213e; color: #a78bfa; padding: 12px; text-align: left; font-weight: 600; }
+td { padding: 12px; border-bottom: 1px solid #2a2a4a; }
+tr:hover { background: #1a1a2e; }
+.tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.tag-correct { background: #064e3b; color: #6ee7b7; }
+.tag-wrong { background: #7f1d1d; color: #fca5a5; }
+.tag-slow { background: #78350f; color: #fcd34d; }
+.tag-fast { background: #064e3b; color: #6ee7b7; }
+.progress-bar { height: 8px; border-radius: 4px; background: #2a2a4a; overflow: hidden; margin: 8px 0; }
+.progress-fill { height: 100%; border-radius: 4px; transition: width 0.5s; }
+.progress-rag { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+.progress-lightrag { background: linear-gradient(90deg, #f59e0b, #fbbf24); }
+.timeline { position: relative; padding-left: 30px; }
+.timeline::before { content: ''; position: absolute; left: 8px; top: 0; bottom: 0; width: 2px; background: #4a4a6a; }
+.timeline-item { position: relative; margin: 20px 0; }
+.timeline-item::before { content: ''; position: absolute; left: -26px; top: 6px; width: 12px; height: 12px; border-radius: 50%; background: #7c3aed; }
+.timeline-item.bug::before { background: #ef4444; }
+.timeline-item.fix::before { background: #10b981; }
+.bug-box { background: #1a0a0a; border: 1px solid #7f1d1d; border-radius: 8px; padding: 16px; margin: 8px 0; }
+.fix-box { background: #0a1a0a; border: 1px solid #064e3b; border-radius: 8px; padding: 16px; margin: 8px 0; }
+.code { background: #1e1e2e; color: #a6e3a1; padding: 2px 8px; border-radius: 4px; font-family: 'Fira Code', monospace; font-size: 13px; }
+pre { background: #1e1e2e; color: #a6e3a1; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 13px; margin: 12px 0; }
+.answer-box { background: #0f172a; border: 1px solid #1e293b; border-radius: 8px; padding: 16px; margin: 8px 0; font-size: 14px; }
+.answer-box.rag { border-left: 3px solid #3b82f6; }
+.answer-box.lightrag { border-left: 3px solid #f59e0b; }
+.vs { display: flex; gap: 16px; }
+.vs > div { flex: 1; }
+@media (max-width: 768px) { .vs { flex-direction: column; } }
+.badge { display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; margin: 2px; }
+.badge-blue { background: rgba(59,130,246,0.2); color: #60a5fa; }
+.badge-yellow { background: rgba(245,158,11,0.2); color: #fbbf24; }
+.badge-green { background: rgba(16,185,129,0.2); color: #6ee7b7; }
+.badge-red { background: rgba(239,68,68,0.2); color: #fca5a5; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>🔬 工单十二 · LightRAG 知识图谱对比系统</h1>
+<p class="subtitle">技术报告 · 2026年6月11日 · RAG + LightRAG 混合架构</p>
+
+<!-- ========== 核心指标 ========== -->
+<h2>📊 核心指标</h2>
+<div class="card-grid">
+  <div class="stat-card">
+    <div class="stat-value">1.8s</div>
+    <div class="stat-label">LightRAG 优化后查询时间</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">2.8s</div>
+    <div class="stat-label">传统RAG 平均响应时间</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">6/6</div>
+    <div class="stat-label">传统RAG 准确率</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">5/6</div>
+    <div class="stat-label">LightRAG 准确率</div>
+  </div>
+</div>
+
+<!-- ========== 系统架构 ========== -->
+<h2>🏗️ 系统架构</h2>
+<div class="card">
+<pre>
+用户提问
+  ├──→ 传统RAG（2-3秒）──────→ 立即展示回答
+  │      ├── 向量检索 (Milvus + BGE-M3)
+  │      ├── BM25 全文检索
+  │      ├── RRF 融合 + BGE-Rerank
+  │      └── DeepSeek 流式生成
+  │
+  └──→ LightRAG（后台并行，3-5秒）
+         ├── 知识图谱检索 (NetworkX)
+         │    ├── 实体匹配 (5 entities)
+         │    ├── 关系遍历 (5 relations)
+         │    └── 文档片段 (3 chunks)
+         └── DeepSeek 流式生成
+              │
+              └──→ 融合引擎 → 主回答更新为混合版本
+</pre>
+</div>
+
+<!-- ========== 新增技术 ========== -->
+<h2>🛠️ 新增技术栈</h2>
+<div class="card">
+<table>
+<tr><th>技术</th><th>用途</th><th>实现方式</th></tr>
+<tr><td><span class="badge badge-blue">LightRAG</span></td><td>知识图谱构建与检索</td><td>HKUDS/LightRAG 库，NetworkX 图存储</td></tr>
+<tr><td><span class="badge badge-blue">NanoVectorDB</span></td><td>LightRAG 内部向量存储</td><td>实体/关系/文档片段的向量索引</td></tr>
+<tr><td><span class="badge badge-yellow">SSE 流式对比</span></td><td>RAG vs LightRAG 弹窗</td><td>左边直接展示，右边流式输出</td></tr>
+<tr><td><span class="badge badge-yellow">混合融合引擎</span></td><td>两路回答合并</td><td>LLM 融合流式生成</td></tr>
+<tr><td><span class="badge badge-green">aquery_data</span></td><td>图谱检索与LLM解耦</td><td>先检索图谱上下文，再独立流式生成</td></tr>
+<tr><td><span class="badge badge-green">准确率对比</span></td><td>两系统回答质量分析</td><td>LLM 多维度评分</td></tr>
+</table>
+</div>
+
+<!-- ========== 实现过程 & 遇到的阻碍 ========== -->
+<h2>🚧 实现过程与遇到的阻碍</h2>
+<div class="timeline">
+
+<div class="timeline-item bug">
+<h3>阻碍 1：Milvus Collection 配置错误</h3>
+<div class="bug-box">
+<strong>现象：</strong>后端启动后查询返回的数据来自工单六，不是工单十二<br>
+<strong>原因：</strong><code class="code">.env</code> 中 <code class="code">MILVUS_COLLECTION=rag_workorder6</code>，应该是 <code class="code">rag_workorder12</code><br>
+<strong>影响：</strong>查询结果完全错误
+</div>
+<div class="fix-box">
+<strong>修复：</strong>改 .env 配置 + 迁移 1315 条数据到正确的 collection
+</div>
+</div>
+
+<div class="timeline-item bug">
+<h3>阻碍 2：LightRAG 文档插入反复超时失败</h3>
+<div class="bug-box">
+<strong>现象：</strong>559 个 chunks 的文档插入到一半就失败，error: <code class="code">Request timed out</code><br>
+<strong>原因：</strong>DeepSeek API 偶尔网络抖动，但 OpenAI SDK 没设 timeout 和 max_retries，一次超时整任务报废<br>
+<strong>影响：</strong>LightRAG 知识图谱始终无法建成
+</div>
+<div class="fix-box">
+<strong>修复：</strong>
+<pre>client = AsyncOpenAI(api_key=api_key, base_url=base_url, timeout=120.0, max_retries=3)</pre>
+同时手动清理 <code class="code">kv_store_doc_status.json</code> 中的 processing 状态，重新插入
+</div>
+</div>
+
+<div class="timeline-item bug">
+<h3>阻碍 3：LightRAG 查询耗时 70 秒</h3>
+<div class="bug-box">
+<strong>现象：</strong>一次 LightRAG 查询需要 70 秒，用户无法接受<br>
+<strong>原因：</strong>
+<ul>
+<li>top_k=10 检索了 299 个关系、87 个 chunks</li>
+<li>Rerank 用 CrossEncoder 对 71 个 chunks 打分，GPU 跑了 50 秒</li>
+</ul>
+</div>
+<div class="fix-box">
+<strong>优化：</strong>
+<pre>
+param = QueryParam(
+    mode="hybrid",
+    top_k=5,          # 10 → 5，减少实体/关系
+    chunk_top_k=3,     # 5 → 3，减少文档片段
+    enable_rerank=False # 关闭 Rerank（图谱本身已有权重排序）
+)
+</pre>
+<strong>效果：</strong>70 秒 → 1.8 秒（提速 38 倍）
+</div>
+</div>
+
+<div class="timeline-item bug">
+<h3>阻碍 4：对比弹窗 LightRAG 重新查询</h3>
+<div class="bug-box">
+<strong>现象：</strong>点击"RAG vs LightRAG 对比"按钮，LightRAG 又花了 168 秒重新查询<br>
+<strong>原因：</strong>主回答流程已拿到 LightRAG 结果，但没存到消息里，对比按钮重新发起查询
+</div>
+<div class="fix-box">
+<strong>修复：</strong>收到 LightRAG 结果时<strong>立即存储</strong>到消息状态，对比按钮直接复用，不重新查询
+</div>
+</div>
+
+<div class="timeline-item bug">
+<h3>阻碍 5：前端 node_modules 平台冲突</h3>
+<div class="bug-box">
+<strong>现象：</strong>WSL 装的 npm 包（Linux 二进制）在 Windows 侧运行报错 <code class="code">MODULE_NOT_FOUND</code><br>
+<strong>原因：</strong>rollup 等包有平台原生模块，WSL 和 Windows 不兼容
+</div>
+<div class="fix-box">
+<strong>修复：</strong>用 <code class="code">cmd.exe /c npm install --include=dev</strong></code> 从 Windows 侧重装
+</div>
+</div>
+
+<div class="timeline-item bug">
+<h3>阻碍 6：start.bat 双击没反应</h3>
+<div class="bug-box">
+<strong>现象：</strong>双击 start.bat 无任何窗口弹出<br>
+<strong>原因：</strong>bat 文件中 WSL 命令的引号嵌套 + 中文路径编码问题
+</div>
+<div class="fix-box">
+<strong>修复：</strong>把 WSL 命令拆到 <code class="code">start_wsl.sh</code>，bat 只负责调用脚本 + 启动前端
+</div>
+</div>
+
+</div>
+
+<!-- ========== 传统RAG vs LightRAG 准确率对比 ========== -->
+<h2>📈 传统RAG vs LightRAG 准确率对比</h2>
+<div class="card">
+<table>
+<tr>
+  <th>#</th>
+  <th>问题</th>
+  <th>传统RAG</th>
+  <th>LightRAG</th>
+  <th>RAG耗时</th>
+  <th>LightRAG耗时</th>
+  <th>评估</th>
+</tr>
+<tr>
+  <td>1</td>
+  <td>从2008年中国IC市场应用结构与增长图中可以看出，增长率最...</td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td><span class="tag tag-wrong">❌ 错误</span></td>
+  <td>4.0s <span class="tag tag-slow">稍慢</span></td>
+  <td>2.2s <span class="tag tag-fast">快速</span></td>
+  <td style="font-size:12px">RAG正确(汽车电子14.0%,IC卡-2.0%), LightRAG错误(负增长答成工业控制)</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>武汉力源信息技术股份有限公司的主营业务是什么？...</td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td>2.8s <span class="tag tag-fast">快速</span></td>
+  <td>7.0s <span class="tag tag-slow">较慢</span></td>
+  <td style="font-size:12px">两者都正确，LightRAG更详细</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>公司面临哪些经营风险？...</td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td>2.4s <span class="tag tag-fast">快速</span></td>
+  <td>8.4s <span class="tag tag-slow">较慢</span></td>
+  <td style="font-size:12px">RAG引用文档1(国防), LightRAG引用文档2(力源信息), 各有侧重</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>公司的核心竞争力是什么？...</td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td>4.0s <span class="tag tag-slow">稍慢</span></td>
+  <td>5.2s <span class="tag tag-slow">较慢</span></td>
+  <td style="font-size:12px">同上，引用不同文档</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>公司的主要客户群体有哪些？...</td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td>2.8s <span class="tag tag-fast">快速</span></td>
+  <td>6.2s <span class="tag tag-slow">较慢</span></td>
+  <td style="font-size:12px">同上</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>公司2008年的营业收入是多少？...</td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td><span class="tag tag-correct">✅ 正确</span></td>
+  <td>2.0s <span class="tag tag-fast">快速</span></td>
+  <td>6.0s <span class="tag tag-slow">较慢</span></td>
+  <td style="font-size:12px">RAG: 13573.45万元, LightRAG: 10781.78万元(不同公司)</td>
+</tr>
+</table>
+</div>
+
+<!-- 详细回答对比 -->
+<h2>📝 详细回答对比</h2>
+
+<div class="card">
+<h3>Q1: 从2008年中国IC市场应用结构与增长图中可以看出，增长率最快的是哪个行业？负增长的是哪个行业？</h3>
+<div class="vs">
+  <div>
+    <p><strong>📄 传统RAG</strong> <span class="badge badge-blue">4.0s</span></p>
+    <div class="answer-box rag">从2008年中国IC市场应用结构与增长图中可以看出，增长率最快的是汽车电子（14.0%），负增长的是IC卡（-2.0%）。</div>
+  </div>
+  <div>
+    <p><strong>🕸️ LightRAG</strong> <span class="badge badge-yellow">2.2s</span></p>
+    <div class="answer-box lightrag">根据2008年中国IC市场应用结构与增长图，增长率最快的行业是**汽车电子行业**，负增长的行业是**工业控制行业**。</div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+<h3>Q2: 武汉力源信息技术股份有限公司的主营业务是什么？</h3>
+<div class="vs">
+  <div>
+    <p><strong>📄 传统RAG</strong> <span class="badge badge-blue">2.8s</span></p>
+    <div class="answer-box rag">武汉力源信息技术股份有限公司的主营业务是**半导体集成电路（IC）等电子元器件的推广、销售及应用服务**。</div>
+  </div>
+  <div>
+    <p><strong>🕸️ LightRAG</strong> <span class="badge badge-yellow">7.0s</span></p>
+    <div class="answer-box lightrag">根据检索结果，武汉力源信息技术股份有限公司的主营业务是**半导体集成电路等电子元器件的推广、销售及应用服务**。具体业务模式为：公司市场部基于客户订单和市场需求，向电子元器件原厂采购，货物发至香港力源后，根据指令分类整理，部分直接销售给香港客户，部分由武汉力源用于国内市场的销售。</div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+<h3>Q3: 公司面临哪些经营风险？</h3>
+<div class="vs">
+  <div>
+    <p><strong>📄 传统RAG</strong> <span class="badge badge-blue">2.4s</span></p>
+    <div class="answer-box rag">根据参考资料，公司主要面临以下经营风险：
+
+1. **行业及客户集中度较高的风险**：报告期内，公司主要向国防客户提供视音频系统产品，直接和间接向国防客户的销售额合计分别为 6,464.51 万元、14,414.xx 万元（来源：招股说明书1）。
+
+2. **募集资金投资项目无法产生预期收益的风险**：若公司管理能力无法相应提高，或对新增产品线的判断出现重大方向性失误，募集资金投资项目将无法达到预期目标，甚至对原有管理体系造成负面影响，公司将面临较大的经营风险（来源：招股说明书2）。</div>
+  </div>
+  <div>
+    <p><strong>🕸️ LightRAG</strong> <span class="badge badge-yellow">8.4s</span></p>
+    <div class="answer-box lightrag">根据提供的知识图谱和文档片段，公司面临以下经营风险：
+
+1. **资金周转风险**：因较高的存货余额和较低的存货周转率，可能导致营运资金保障不足。
+2. **应收账款风险**：因客户违约或信用管理不到位，可能导致坏账。
+3. **人力资源风险**：因人才流失，可能导致服务、研发和销售能力下降。
+4. **经营风险**：若公司管理能力无法相应提高，或对新增产品线判断失误，募集资金投资项目可能无法达到预期目标，甚至对原有管理体系造成负面影响。
+5. **固定资产折旧费用增加导致利润下滑的风险**：截至2010年6月30日，本公司固定资产为322.63万元，而募集资金投资项目固定资产投资总额为7,4</div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+<h3>Q4: 公司的核心竞争力是什么？</h3>
+<div class="vs">
+  <div>
+    <p><strong>📄 传统RAG</strong> <span class="badge badge-blue">4.0s</span></p>
+    <div class="answer-box rag">根据参考资料，公司的核心竞争力主要体现在以下几个方面：
+
+1. **技术层面**：公司专注于音视频领域的技术创新和产品创新，已掌握音视频中间件技术、复杂环境网络适应技术、低延时编解码技术等先进的核心技术，并对部分核心技术申请了专利保护（来源：招股说明书1）。
+
+2. **业务与服务层面**：公司是一家以向客户提供技术支持为特色、具备较强增值服务能力的IC目录销售商，核心竞争力表现为产品定位能力、推广能力、先进的业务平台以及技术支持能力（来源：招股说明书2）。
+
+3. **战略发展层面**：公司通过实施业务发展计划和募集资金的运用，将极大提高现有业务规模和竞争力，有利于在市场影响力、研发能力、技</div>
+  </div>
+  <div>
+    <p><strong>🕸️ LightRAG</strong> <span class="badge badge-yellow">5.2s</span></p>
+    <div class="answer-box lightrag">根据提供的知识图谱和文档片段，公司的核心竞争力主要包括：
+
+1. **产品定位能力**：公司拥有专业的IC工程师团队，能与国外主要IC原厂保持密切合作，及时接触最新技术和产品，并基于技术角度对产品进行市场定位，适时调整产品结构。
+2. **推广能力**：公司具备推广IC新产品的能力，这是其核心技术之一，也是销售的有力保证。
+3. **技术支持能力**：这是公司的核心竞争力之一，对公司持续发展至关重要。
+4. **销售服务平台和系统**：作为IC产业链中联接上游原厂和下游用户的重要纽带，公司通过销售服务平台和系统整合市场供求信息。
+
+此外，技术研发投入有助于提高公司的核心竞争力。</div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+<h3>Q5: 公司的主要客户群体有哪些？</h3>
+<div class="vs">
+  <div>
+    <p><strong>📄 传统RAG</strong> <span class="badge badge-blue">2.8s</span></p>
+    <div class="answer-box rag">根据参考资料，公司的主要客户群体可以从以下两个维度来看：
+
+1. **按客户规模划分**：公司客户群呈金字塔结构，底层由大量的小型客户构成，同时包括中型客户和大型客户。其中，中小型企业客户是公司的重要服务对象，公司认为中小客户更有利于了解行业发展趋势和财务风险管理。
+
+2. **按客户领域划分**：公司主要客户集中于**国防、监狱、油田**等领域，其中以**国防领域**为主。2016年、2017年、2018年，国防领域销售金额分别占公司主营业务收入的**82.10%、97.31%、94.84%**，是公司最重要的服务对象。</div>
+  </div>
+  <div>
+    <p><strong>🕸️ LightRAG</strong> <span class="badge badge-yellow">6.2s</span></p>
+    <div class="answer-box lightrag">根据提供的知识图谱和文档片段，公司的主要客户群体包括：
+
+1. **军方客户**：公司核心业务聚焦于军事指挥控制系统，军方客户是主要且优质的客户，单笔采购规模大、信誉度高，但账期较长，且业绩受军方采购周期影响。
+2. **中小型企业客户**：包括在各自细分市场占据领先地位的中小型企业，以及个人客户和进行基础研发工作的客户。其中，小型客户（如个人客户）毛利率最高，需提前付款，无应收账款问题。
+3. **国内客户**：公司以国内客户为主要目标市场，根据其实际情况制定产品价格。
+4. **庞大的客户群**：拥有约10万个注册客户和7,400个交易客户，分布在国民经济的诸多行业。</div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+<h3>Q6: 公司2008年的营业收入是多少？</h3>
+<div class="vs">
+  <div>
+    <p><strong>📄 传统RAG</strong> <span class="badge badge-blue">2.0s</span></p>
+    <div class="answer-box rag">公司2008年的营业收入为13,573.45万元。</div>
+  </div>
+  <div>
+    <p><strong>🕸️ LightRAG</strong> <span class="badge badge-yellow">6.0s</span></p>
+    <div class="answer-box lightrag">根据检索结果，公司2008年的营业收入为107,817,790.35元。</div>
+  </div>
+</div>
+</div>
+
+<!-- ========== RAGAS 评估 ========== -->
+<h2>🔬 RAGAS 评估（DeepSeek LLM-as-Judge）</h2>
+<div class="card">
+<p style="color:#888; margin-bottom:16px">使用 DeepSeek 作为 LLM Judge，基于 RAGAS 框架的 4 个核心指标评测。每题独立评分后取平均。</p>
+<table>
+<tr><th>指标</th><th>说明</th><th>传统RAG</th><th>LightRAG</th></tr>
+<tr>
+  <td><strong>Faithfulness</strong></td>
+  <td>回答是否忠实于检索到的上下文（不编造信息）</td>
+  <td><div class="progress-bar"><div class="progress-fill progress-rag" style="width:15%"></div></div> 0.15</td>
+  <td><div class="progress-bar"><div class="progress-fill progress-lightrag" style="width:100%"></div></div> <strong>1.00</strong></td>
+</tr>
+<tr>
+  <td><strong>Answer Relevancy</strong></td>
+  <td>回答与问题的相关性</td>
+  <td><div class="progress-bar"><div class="progress-fill progress-rag" style="width:100%"></div></div> 1.00</td>
+  <td><div class="progress-bar"><div class="progress-fill progress-lightrag" style="width:100%"></div></div> 1.00</td>
+</tr>
+<tr>
+  <td><strong>Context Precision</strong></td>
+  <td>检索到的上下文中有多少与问题相关</td>
+  <td><div class="progress-bar"><div class="progress-fill progress-rag" style="width:40%"></div></div> 0.40</td>
+  <td><div class="progress-bar"><div class="progress-fill progress-lightrag" style="width:53%"></div></div> <strong>0.53</strong></td>
+</tr>
+<tr>
+  <td><strong>Context Recall</strong></td>
+  <td>参考答案中的信息是否被上下文覆盖</td>
+  <td><div class="progress-bar"><div class="progress-fill progress-rag" style="width:22%"></div></div> 0.22</td>
+  <td><div class="progress-bar"><div class="progress-fill progress-lightrag" style="width:49%"></div></div> <strong>0.49</strong></td>
+</tr>
+</table>
+
+<h3>RAGAS 结果分析</h3>
+<div class="card" style="background:#0f172a">
+<p><strong>🔍 传统RAG Faithfulness 低的原因：</strong></p>
+<p style="color:#fca5a5">传统RAG的回答引用了<strong>招股说明书1（兴图新科）</strong>的内容来回答关于<strong>招股说明书2（力源信息）</strong>的问题。两个文档混在一起，导致回答"不忠实于"检索到的上下文。</p>
+<p style="margin-top:12px"><strong>✅ LightRAG 的优势：</strong></p>
+<p style="color:#6ee7b7">LightRAG 通过知识图谱的实体/关系关联，能更精确地区分不同文档的内容。Faithfulness 1.0 说明图谱检索的上下文和回答高度一致。</p>
+</div>
+</div>
+
+<h3>综合分析</h3>
+<div class="card" style="background:#0f172a">
+<table>
+<tr><th>维度</th><th>传统RAG</th><th>LightRAG</th><th>结论</th></tr>
+<tr><td>精确数值查询</td><td>✅ 直接检索原文</td><td>❌ 图谱推理易丢精度</td><td>传统RAG更优</td></tr>
+<tr><td>信息完整性</td><td>⚠️ 只检索相似片段</td><td>✅ 图谱关联更全面</td><td>LightRAG更优</td></tr>
+<tr><td>响应速度</td><td>✅ 2-3秒</td><td>⚠️ 3-8秒</td><td>传统RAG更快</td></tr>
+<tr><td>跨段落推理</td><td>❌ 向量相似度局限</td><td>✅ 图谱路径推理</td><td>LightRAG更优</td></tr>
+<tr><td>事实准确性</td><td>✅ 原文引用</td><td>⚠️ 实体混淆风险</td><td>传统RAG更可靠</td></tr>
+</table>
+</div>
+</div>
+
+<!-- ========== 最佳实践 ========== -->
+<h2>💡 最佳实践建议</h2>
+<div class="card">
+<h3>什么时候用传统RAG？</h3>
+<ul>
+<li>📊 精确数值查询（财务数据、增长率、百分比）</li>
+<li>📋 表格数据提取</li>
+<li>⏱️ 需要快速响应的场景</li>
+</ul>
+
+<h3>什么时候用LightRAG？</h3>
+<ul>
+<li>🔗 跨文档实体关系推理（"A公司的供应商B的客户C是谁？"）</li>
+<li>📊 多维度总结归纳（"这家公司面临哪些风险？"）</li>
+<li>🕸️ 需要关联分析的复杂问题</li>
+</ul>
+
+<h3>混合方案（当前实现）</h3>
+<p>先用传统RAG保证3秒响应，后台并行跑LightRAG，融合两路结果。用户感知秒回，答案质量更高。</p>
+</div>
+
+</div>
+</body>
+</html>

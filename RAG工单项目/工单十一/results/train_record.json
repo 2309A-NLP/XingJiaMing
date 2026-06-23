@@ -1,0 +1,15 @@
+{
+  "base_model": "/mnt/e/桌面/项目文件/RAG工单项目/工单十一/model/bge-base-zh-v1.5",
+  "finetuned_model": "/mnt/e/桌面/项目文件/RAG工单项目/工单十一/model/bge-finetuned",
+  "train_samples": 1220,
+  "epochs": 1,
+  "batch_size": 16,
+  "learning_rate": 5e-06,
+  "warmup_steps": 7,
+  "margin": 0.3,
+  "max_seq_length": 128,
+  "duration_seconds": 29.883566,
+  "device": "cuda",
+  "gpu": "NVIDIA GeForce RTX 4060 Laptop GPU",
+  "timestamp": "2026-06-08T15:18:01.644131"
+}
